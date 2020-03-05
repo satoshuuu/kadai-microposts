@@ -11,6 +11,8 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     <li class="nav-item">{!! link_to_route('users.index', 'Users', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('microposts.show', 'ShowAll', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('microposts.search', 'Search', [], ['class' => 'nav-link']) !!}</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">

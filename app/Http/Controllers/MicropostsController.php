@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Micropost;
+
 class MicropostsController extends Controller
 {
     public function index() {
@@ -41,4 +43,29 @@ class MicropostsController extends Controller
         
         return back();
     }
+    
+    //一覧表示
+    public function show() {
+        $microposts = Micropost::orderBy('id', 'desc')->paginate(10);
+        
+        return view('microposts.show', [
+            'microposts' => $microposts,
+            ]);
+    }
+    
+    //検索機能
+    public function search(Request $request) {
+        $keyword = $request->keyword;
+        
+        if(!empty($keyword)) {
+            $microposts = Micropost::orderBy('id', 'desc')->where('content','like', '%'.$keyword.'%')->paginate(10);
+        }else {
+            $microposts = Micropost::orderBy('id', 'desc')->paginate(10);
+        }
+        
+        return view('search.index', [
+                'microposts' => $microposts,
+            ]);
+    }
+    
 }

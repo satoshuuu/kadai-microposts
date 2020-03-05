@@ -21,6 +21,9 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::get('show', 'MicropostsController@show')->name('microposts.show');
+    Route::get('search', 'MicropostsController@search')->name('microposts.search');
+    Route::post('search', 'MicropostsController@search')->name('microposts.searched');
     
     Route::group(['prefix' => 'users/{id}'], function() {
         Route::post('follow', 'UserFollowController@store')->name('user.follow');
